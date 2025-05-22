@@ -182,12 +182,13 @@ export class CommandHandler {
   }
 
   private _runTestCommands(): void {
-    Object.keys(data).forEach((k, i) => {
-      setTimeout(() => this.executeCommand(k), i * 3000);
-    });
-    Object.keys(apis).forEach((k, i) => {
-      setTimeout(() => this.executeCommand(k), i * 3000);
-    });
+    [
+      "help",
+      "date",
+      ...Object.keys(data).map((k) => k),
+      ...Object.keys(apis).map((k) => k),
+      "history",
+    ].forEach((k, i) => setTimeout(() => this.executeCommand(k), i * 3000));
   }
 
   private _createErrorMessage(
